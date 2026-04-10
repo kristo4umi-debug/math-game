@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<title>Mješovita školska igra</title>
+<style>
+body {
+    font-family: Arial;
+    text-align: center;
+}
+
+h1 {
+    font-size: 28px;
+}
+
+#pitanje {
+    font-size: 36px;
+    margin: 20px;
+}
+
+#gumbi button {
+    font-size: 18px;
+    width: 160px;
+    height: 60px;
+    margin: 6px;
+}
+
+#rezultat {
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+#score {
+    font-size: 24px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🎮 Mješovita školska igra</h1>
+
+<div id="pitanje"></div>
+<div id="gumbi"></div>
+<div id="rezultat"></div>
+<div id="score">Bodovi: 0</div>
+
+<script>
+let score = 0;
+let current = 0;
+
+let pitanja = [
+    { pitanje: "H2O je?", tocno: "Voda", opcije: ["Voda", "Kisik", "Sol", "Željezo"] },
+    { pitanje: "O2 je?", tocno: "Kisik", opcije: ["Kisik", "Voda", "Ugljik", "Helij"] },
+    { pitanje: "5 + 7 = ?", tocno: "12", opcije: ["10", "12", "13", "11"] },
+    { pitanje: "10 × 2 = ?", tocno: "20", opcije: ["20", "18", "22", "15"] },
+    { pitanje: "NaCl je?", tocno: "Sol", opcije: ["Sol", "Šećer", "Kisik", "Voda"] },
+    { pitanje: "15 - 6 = ?", tocno: "9", opcije: ["8", "9", "10", "7"] },
+    { pitanje: "CO2 je?", tocno: "Ugljikov dioksid", opcije: ["Ugljikov dioksid", "Kisik", "Voda", "Dušik"] },
+    { pitanje: "3 × 3 = ?", tocno: "9", opcije: ["6", "9", "12", "8"] }
+];
+
+function novaPitanja() {
+    let q = pitanja[current];
+
+    document.getElementById("pitanje").innerText = q.pitanje;
+
+    let gumbi = document.getElementById("gumbi");
+    gumbi.innerHTML = "";
+
+    let opcije = [...q.opcije];
+    opcije.sort(() => Math.random() - 0.5);
+
+    opcije.forEach(opcija => {
+        let btn = document.createElement("button");
+        btn.innerText = opcija;
+        btn.onclick = () => provjeri(opcija);
+        gumbi.appendChild(btn);
+    });
+
+    document.getElementById("rezultat").innerText = "";
+}
+
+function provjeri(odgovor) {
+    let tocno = pitanja[current].tocno;
+
+    if (odgovor === tocno) {
+        score++;
+        document.getElementById("rezultat").innerText = "Bravo! ✅";
+    } else {
+        document.getElementById("rezultat").innerText = "Netočno ❌ (Točno: " + tocno + ")";
+    }
+
+    document.getElementById("score").innerText = "Bodovi: " + score;
+
+    setTimeout(() => {
+        current++;
+        if (current >= pitanja.length) current = 0;
+        novaPitanja();
+    }, 1200);
+}
+
+novaPitanja();
+</script>
+
+</body>
+</html>
