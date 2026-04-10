@@ -1,107 +1,79 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mješovita školska igra</title>
-<style>
-body {
-    font-family: Arial;
-    text-align: center;
-}
-
-h1 {
-    font-size: 28px;
-}
-
-#pitanje {
-    font-size: 36px;
-    margin: 20px;
-}
-
-#gumbi button {
-    font-size: 18px;
-    width: 160px;
-    height: 60px;
-    margin: 6px;
-}
-
-#rezultat {
-    font-size: 22px;
-    margin-top: 10px;
-}
-
-#score {
-    font-size: 24px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math and Science Quiz</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .question { margin: 20px 0; }
+        .buttons { margin-top: 20px; }
+        button { padding: 10px 15px; }
+    </style>
 </head>
-
 <body>
+    <h1>Math and Science Quiz</h1>
+    
+    <button onclick="window.location.href='index.html'">Back to Menu</button>
+    
+    <div id="quiz">
+        <div class="question">
+            <p>1. What is 2 + 2?</p>
+            <input type="text" id="answer1">
+        </div>
+        <div class="question">
+            <p>2. What is the chemical symbol for water?</p>
+            <input type="text" id="answer2">
+        </div>
+        <div class="question">
+            <p>3. What is the speed of light in vacuum (in m/s)?</p>
+            <input type="text" id="answer3">
+        </div>
+        <div class="question">
+            <p>4. What is the powerhouse of the cell?</p>
+            <input type="text" id="answer4">
+        </div>
+        <div class="question">
+            <p>5. What is 5 * 6?</p>
+            <input type="text" id="answer5">
+        </div>
+        <div class="question">
+            <p>6. What planet is known as the Red Planet?</p>
+            <input type="text" id="answer6">
+        </div>
+        <div class="question">
+            <p>7. What is the value of pi (π) approximately?</p>
+            <input type="text" id="answer7">
+        </div>
+        <div class="question">
+            <p>8. How many degrees are in a circle?</p>
+            <input type="text" id="answer8">
+        </div>
+        <div class="buttons">
+            <button onclick="submitQuiz()">Submit</button>
+        </div>
+        <div id="result"></div>
+    </div>
 
-<h1>🎮 Mješovita školska igra</h1>
-
-<div id="pitanje"></div>
-<div id="gumbi"></div>
-<div id="rezultat"></div>
-<div id="score">Bodovi: 0</div>
-
-<script>
-let score = 0;
-let current = 0;
-
-let pitanja = [
-    { pitanje: "H2O je?", tocno: "Voda", opcije: ["Voda", "Kisik", "Sol", "Željezo"] },
-    { pitanje: "O2 je?", tocno: "Kisik", opcije: ["Kisik", "Voda", "Ugljik", "Helij"] },
-    { pitanje: "5 + 7 = ?", tocno: "12", opcije: ["10", "12", "13", "11"] },
-    { pitanje: "10 × 2 = ?", tocno: "20", opcije: ["20", "18", "22", "15"] },
-    { pitanje: "NaCl je?", tocno: "Sol", opcije: ["Sol", "Šećer", "Kisik", "Voda"] },
-    { pitanje: "15 - 6 = ?", tocno: "9", opcije: ["8", "9", "10", "7"] },
-    { pitanje: "CO2 je?", tocno: "Ugljikov dioksid", opcije: ["Ugljikov dioksid", "Kisik", "Voda", "Dušik"] },
-    { pitanje: "3 × 3 = ?", tocno: "9", opcije: ["6", "9", "12", "8"] }
-];
-
-function novaPitanja() {
-    let q = pitanja[current];
-
-    document.getElementById("pitanje").innerText = q.pitanje;
-
-    let gumbi = document.getElementById("gumbi");
-    gumbi.innerHTML = "";
-
-    let opcije = [...q.opcije];
-    opcije.sort(() => Math.random() - 0.5);
-
-    opcije.forEach(opcija => {
-        let btn = document.createElement("button");
-        btn.innerText = opcija;
-        btn.onclick = () => provjeri(opcija);
-        gumbi.appendChild(btn);
-    });
-
-    document.getElementById("rezultat").innerText = "";
-}
-
-function provjeri(odgovor) {
-    let tocno = pitanja[current].tocno;
-
-    if (odgovor === tocno) {
-        score++;
-        document.getElementById("rezultat").innerText = "Bravo! ✅";
-    } else {
-        document.getElementById("rezultat").innerText = "Netočno ❌ (Točno: " + tocno + ")";
-    }
-
-    document.getElementById("score").innerText = "Bodovi: " + score;
-
-    setTimeout(() => {
-        current++;
-        if (current >= pitanja.length) current = 0;
-        novaPitanja();
-    }, 1200);
-}
-
-novaPitanja();
-</script>
-
+    <script>
+        function submitQuiz() {
+            let score = 0;
+            let feedback = [];
+            const answers = [
+                "4", "H2O", "299792458", "Mitochondria", "30", "Mars", "3.14", "360"
+            ];
+            for (let i = 0; i < answers.length; i++) {
+                const userAnswer = document.getElementById(`answer${i + 1}`).value;
+                if (userAnswer === answers[i]) {
+                    score++;
+                    feedback.push(`Q${i + 1}: Correct`);
+                } else {
+                    feedback.push(`Q${i + 1}: Wrong, the correct answer is ${answers[i]}.`);
+                }
+            }
+            document.getElementById("result").innerHTML = `You scored ${score} out of ${answers.length}.<br>` + feedback.join("<br>");
+        }
+    </script>
 </body>
 </html>
