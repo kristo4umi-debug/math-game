@@ -1,10 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Math Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Game - Welcome</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .menu-container {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 10px;
+            animation: slideDown 0.5s ease;
+        }
+        
+        .emoji {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        p {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        
+        .button {
+            display: block;
+            padding: 15px 30px;
+            margin: 12px 0;
+            border: none;
+            border-radius: 8px;
+            background-color: #667eea;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+        
+        .button:hover {
+            background-color: #764ba2;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .button.primary {
+            background-color: #48bb78;
+            font-size: 18px;
+            padding: 18px 30px;
+        }
+        
+        .button.primary:hover {
+            background-color: #38a169;
+            background-color: #38a169;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to the Math Game!</h1>
-    <p>Test your math skills with fun challenges!</p>
+    <div class="menu-container">
+        <div class="emoji">🎮</div>
+        <h1>Math Game</h1>
+        <p>Test your math and science knowledge with fun quizzes!</p>
+        
+        <a href="matimatika.html" class="button primary">🚀 Start Game</a>
+        <a href="#" class="button">⚙️ Settings</a>
+        <a href="#" class="button">🏆 High Scores</a>
+        <a href="#" class="button">ℹ️ About</a>
+    </div>
 </body>
 </html>
